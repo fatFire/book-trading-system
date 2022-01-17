@@ -2,7 +2,7 @@ import axios from "axios";
 import * as qs from "qs"
 
 const baseURL = 'http://localhost:1337'
-const token = JSON.parse(window.localStorage.getItem('jwt'));
+const token = window.localStorage.getItem('jwt')
  
 
 const create = (url) => (data) => {

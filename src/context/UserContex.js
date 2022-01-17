@@ -13,11 +13,11 @@ const parseJwt = (token) => {
 
 function useUser() {
   const [user, setUser] = useState({})
-  const [cart, setCart] = useState({})
+  
   const history = useHistory()
 
   const login = (data) => {
-    localStorage.setItem('jwt', JSON.stringify(data.jwt))
+    localStorage.setItem('jwt', data.jwt)
     setUser(data.user)
   }
   const logout = () => {
@@ -38,7 +38,7 @@ function useUser() {
   //console.log(decodeJWT)
   // console.log(new Date(token?.exp * 1000))
 
-  return { user, login, logout, reLogin, cart, setCart }
+  return { user, login, logout, reLogin }
 }
 
 const User = createContainer(useUser)
