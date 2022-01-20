@@ -117,13 +117,6 @@ export default function Details() {
             justifyContent="center"
             alignItems="center"
           >
-            {/* <Image
-              src={`${baseURL}` + book.imgs?.[0]?.url}
-              border="none"
-              height="250px"
-              width="150px"
-              fit="fill"
-            /> */}
             <Image
               src={book.cover}
               border="none"

@@ -28,7 +28,6 @@ export default function Signup() {
           token: user.jwt
         }
       );
-      console.log(cart);
       return { user, cart};
     } catch (e) {
       throw e;
@@ -49,7 +48,6 @@ export default function Signup() {
       history.replace('/');
     },
     onError: error => {
-      console.log(error);
       standaloneToast({
         title: 'Error',
         description:

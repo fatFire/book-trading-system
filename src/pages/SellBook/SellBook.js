@@ -50,7 +50,6 @@ export default function SellBook() {
     enabled:
       formik.values.isbn.length === 10 || formik.values.isbn.length === 13,
     onSuccess: data => {
-      console.log(data);
       formik.setFieldValue('bookname', data.title);
       formik.setFieldValue('author', data.authors?.[0]);
       formik.setFieldValue('category', data.categories?.[0]);

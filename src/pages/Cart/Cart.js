@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Heading, Table, Thead, Tbody, Tr, Th, Td, Image, Text, Button, Flex, } from '@chakra-ui/react';
-import { useQueryClient, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import { useHistory, Redirect } from 'react-router';
 import CartContex from '../../context/CartContext';
 import UserContext from '../../context/UserContex'
@@ -20,9 +20,7 @@ export default function Cart() {
 
   const deleteBook = function (id) {
     const books = cart.books.filter(book => book.id !== id);
-    const data = {
-      books,
-    };
+    const data = { books };
     return deleteBookFromCart(cart.id, data, { token });
   };
 

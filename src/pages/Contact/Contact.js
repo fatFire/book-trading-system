@@ -45,7 +45,6 @@ export default function Contact() {
 
   useEffect(() => {
     socket.on('send_message', res => {
-      console.log(res);
       setMessages(prev => {
         return [...prev, res];
       });

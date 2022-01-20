@@ -19,9 +19,9 @@ const AuthVerify = function () {
   const cartContext = CartContext.useContainer();
   const history = useHistory();
 
-  
 
-  
+
+
 
   const isValid = () => {
     const token = JSON.parse(localStorage.getItem('jwt')) || undefined;
@@ -62,9 +62,8 @@ const AuthVerify = function () {
     },
     {
       enabled: isValid() && getUserSuccess,
-      onSuccess: data => { 
+      onSuccess: data => {
         let token = JSON.parse(localStorage.getItem('jwt'));
-        console.log(user, data);
         userContext.login({
           jwt: token,
           user: user.data,
@@ -75,32 +74,6 @@ const AuthVerify = function () {
       },
     }
   );
-
-  console.log(user, cart);
-
-  // if(getUserSuccess && getCartSuccess) {
-  //   userContext.login({
-  //     jwt: token,
-  //     user: user.data
-  //   })
-  //   cartContext.setCart(cart.data[0])
-  // }
-
-  // useEffect(() => {
-  //   userContext.login({
-  //     jwt: token,
-  //     user: user.data
-  //   })
-  //   cartContext.setCart(cart.data[0])
-  // }, [])
-
-  // useEffect(() => {
-  //   axios.get('http://localhost:1337/users/me', {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  // }, []);
 
   history.listen(() => {
     let token = JSON.parse(localStorage.getItem('jwt'));
