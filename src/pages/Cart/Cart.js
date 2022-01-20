@@ -1,30 +1,9 @@
 import React from 'react';
-import {
-  Box,
-  Heading,
-  IconButton,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  Image,
-  TableCaption,
-  Grid,
-  Text,
-  Button,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, Heading, Table, Thead, Tbody, Tr, Th, Td, Image, Text, Button, Flex, } from '@chakra-ui/react';
 import { useQueryClient, useMutation } from 'react-query';
 import { useHistory, Redirect } from 'react-router';
-import axios from 'axios';
-import Loading from '../../component/Loading';
-import User from '../../context/UserContex';
 import CartContex from '../../context/CartContext';
 import UserContext from '../../context/UserContex'
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { deleteBookFromCart } from './api';
 
 export default function Cart() {
@@ -33,8 +12,6 @@ export default function Cart() {
   const { user } = UserContext.useContainer()
   const { cart, setCart } = CartContex.useContainer();
   const history = useHistory();
-  const queryClient = useQueryClient();
-
 
   let totalamount = 0;
   cart.books?.forEach(book => {

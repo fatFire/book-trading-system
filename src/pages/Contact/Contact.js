@@ -1,26 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Flex,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
-  Box,
-  Heading,
-  Image,
-  Select,
-  SimpleGrid,
-  Divider,
-  Textarea,
-  Button,
-} from '@chakra-ui/react';
+import { Flex, Text, Box, Image, Textarea, Button, } from '@chakra-ui/react';
 import UserContext from '../../context/UserContex';
-import { useHistory, useParams, Redirect } from 'react-router';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Redirect } from 'react-router';
+import { useQuery, useQueryClient } from 'react-query';
 import { socket } from '../../web-sockets';
-import ClosePage from '../../component/ClosePage';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { findAllCoversations } from './api';
 
 export default function Contact() {

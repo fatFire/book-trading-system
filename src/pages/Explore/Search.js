@@ -1,32 +1,9 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  RangeSlider,
-  RangeSliderTrack,
-  RangeSliderFilledTrack,
-  RangeSliderThumb,
-  filter,
-  NumberInput,
-  NumberInputField,
-  Flex,
-  Select,
-} from '@chakra-ui/react';
+import React from 'react';
+import { Box, Input, InputGroup, InputLeftElement, InputRightElement, IconButton, Menu, MenuButton, MenuList, NumberInput, NumberInputField, Flex, Select, } from '@chakra-ui/react';
 import { AiOutlineSearch, AiOutlineBars, AiOutlineReload } from 'react-icons/ai';
-import { useQuery } from 'react-query';
-import axios from 'axios';
-import * as qs from 'qs';
+
 
 export default function Search({filters, setFilters, refetch}) {
-
 
   const handleInputChange = event => {
     setFilters(prevState => {

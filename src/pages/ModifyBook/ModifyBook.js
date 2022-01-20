@@ -1,33 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Flex,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
-  Box,
-  Grid,
-  Input,
-  NumberInput,
-  NumberInputField,
-  Textarea,
-  Heading,
-  Image,
-  Select,
-  GridItem,
-  Button,
-  FormControl,
-  FormLabel,
-  createStandaloneToast,
-} from '@chakra-ui/react';
+import React from 'react';
+import { IconButton, Box, Grid, Input, NumberInput, NumberInputField, Textarea, Heading, Select, GridItem, Button, FormControl, FormLabel, createStandaloneToast, } from '@chakra-ui/react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router';
 import { useMutation } from 'react-query';
-import axios from 'axios';
-import { Wrap } from '../../component/Wrap';
-import { Redirect } from 'react-router';
 import User from '../../context/UserContex';
 import { modifyBook } from './api';
 

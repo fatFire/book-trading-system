@@ -1,39 +1,13 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  InputGroup,
-  Input,
-  InputRightElement,
-  InputLeftElement,
-  Button,
-  Grid,
-  GridItem,
-  chakra,
-  useToast,
-  createStandaloneToast,
-  Link,
-  Checkbox,
-  Flex,
-  Tabs, TabList, TabPanels, Tab, TabPanel,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-
-} from '@chakra-ui/react';
+import { Box, InputGroup, Input, InputRightElement, Button, createStandaloneToast, Link, Flex, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { AiOutlineUser, AiOutlineKey, AiOutlineMail } from 'react-icons/ai';
 import { useMutation } from 'react-query';
-import { Redirect, useHistory } from 'react-router';
-import { Wrap } from '../../component/Wrap';
+import { useHistory } from 'react-router';
 import UserContext from '../../context/UserContex';
 import CartContext from '../../context/CartContext';
-import ClosePage from '../../component/ClosePage';
-import axios from 'axios';
-import { adminLogin } from '../../api/api';
-import { socket } from '../../web-sockets';
 import { signin, getCart } from './api';
 import * as Yup from 'yup';
-import { Formik, Field, Form, ErrorMessage, useFormik } from 'formik';
+import { Formik, Field, Form } from 'formik';
 
 export default function UserSignin() {
   const [show, setShow] = useState(false);

@@ -1,29 +1,10 @@
-import React, { useState } from 'react';
-import {
-  Flex,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
-  Box,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  Button,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-} from '@chakra-ui/react';
-import {
-  AiOutlineShopping,
-  AiOutlineRight,
-  AiOutlineMail,
-} from 'react-icons/ai';
+import React from 'react';
+import { Flex, Avatar, IconButton, Text, Link, Icon, Box, Popover, PopoverTrigger, PopoverContent, PopoverBody, Button, PopoverArrow, } from '@chakra-ui/react';
+import { AiOutlineShopping, AiOutlineMail, } from 'react-icons/ai';
 import { NavLink as RouterLink, useHistory } from 'react-router-dom';
 import UserContex from '../../context/UserContex';
 import CartContext from '../../context/CartContext';
+import UserNavBar from './UserNavBar'
 
 export default function SideBar() {
   const { user, logout: userLogout } = UserContex.useContainer();
@@ -97,82 +78,6 @@ export default function SideBar() {
           />
         </Flex>
         <UserNavBar />
-    </Box>
-  );
-}
-
-function UserNavBar() {
-  return (
-    <Box w="260px" m="0 auto">
-      <Link
-        as={RouterLink}
-        to="/explore"
-        exact
-        fontSize="20px"
-        display="flex"
-        w="100%"
-        justifyContent="space-between"
-        alignItems="center"
-        mb="30px"
-        fontWeight="semibold"
-        color="gray.400"
-        activeStyle={{
-          color: '#2A4365',
-        }}
-      >
-        Expolre <Icon as={AiOutlineRight}></Icon>
-      </Link>
-      <Link
-        as={RouterLink}
-        to="/sellbook"
-        fontSize="20px"
-        display="flex"
-        w="100%"
-        justifyContent="space-between"
-        alignItems="center"
-        mb="30px"
-        fontWeight="semibold"
-        color="gray.400"
-        activeStyle={{
-          color: '#2A4365',
-        }}
-      >
-        Sell book <Icon as={AiOutlineRight}></Icon>
-      </Link>
-      <Link
-        as={RouterLink}
-        to="/mybooks"
-        fontSize="20px"
-        display="flex"
-        w="100%"
-        justifyContent="space-between"
-        alignItems="center"
-        mb="30px"
-        fontWeight="semibold"
-        color="gray.400"
-        activeStyle={{
-          color: '#2A4365',
-        }}
-      >
-        My Books <Icon as={AiOutlineRight}></Icon>
-      </Link>
-      <Link
-        as={RouterLink}
-        to="/myorders"
-        fontSize="20px"
-        display="flex"
-        w="100%"
-        justifyContent="space-between"
-        alignItems="center"
-        mb="30px"
-        fontWeight="semibold"
-        color="gray.400"
-        activeStyle={{
-          color: '#2A4365',
-        }}
-      >
-        My Orders <Icon as={AiOutlineRight}></Icon>
-      </Link>
     </Box>
   );
 }

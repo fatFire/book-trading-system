@@ -1,11 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Flex,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
   Box,
   Grid,
   Input,
@@ -13,21 +8,16 @@ import {
   NumberInputField,
   Textarea,
   Heading,
-  Image,
   Select,
   GridItem,
   Button,
   FormControl,
   FormLabel,
   createStandaloneToast,
-  grid,
 } from '@chakra-ui/react';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useFormik, useFormikContext } from 'formik';
 import { useHistory } from 'react-router';
 import { useMutation, useQuery } from 'react-query';
-import axios from 'axios';
-import { Wrap } from '../../component/Wrap';
 import { Redirect } from 'react-router';
 import User from '../../context/UserContex';
 import { categoriesMap } from '../../common/CategoriesMap';
@@ -266,7 +256,7 @@ export default function SellBook() {
               Book Images:
             </FormLabel>
             <FileUpload
-              
+
               updateFilesCb={updateUploadedFilesMemo}
             />
           </FormControl>

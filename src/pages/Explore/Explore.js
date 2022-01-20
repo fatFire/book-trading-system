@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Text, Box, Heading, Image, Grid } from '@chakra-ui/react';
+import { Flex, Box, Heading, Grid } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import Search from './Search';
 import { getAllBooks } from './api';
 import BookCover from './BookCover';

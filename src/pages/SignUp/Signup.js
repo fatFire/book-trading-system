@@ -1,36 +1,13 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  InputGroup,
-  Input,
-  InputRightElement,
-  InputLeftElement,
-  Button,
-  Grid,
-  GridItem,
-  chakra,
-  useToast,
-  createStandaloneToast,
-  Link,
-  Text,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Flex
-} from '@chakra-ui/react';
+import { Box, InputGroup, Input, InputRightElement, Button, createStandaloneToast, Link, FormControl, FormLabel, FormErrorMessage, Flex } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { AiOutlineUser, AiOutlineKey, AiOutlineMail } from 'react-icons/ai';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router';
-import { Wrap } from '../../component/Wrap';
 import User from '../../context/UserContex';
 import CartContext from '../../context/CartContext';
-import ClosePage from '../../component/ClosePage';
 import { register, createCart } from './api';
-
-
-import { Formik, Field, Form, ErrorMessage, useFormik } from 'formik';
+import { Formik, Field, Form } from 'formik';
 
 export default function Signup() {
   const [show, setShow] = useState(false);

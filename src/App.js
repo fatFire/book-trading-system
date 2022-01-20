@@ -1,22 +1,8 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-} from '@chakra-ui/react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter as Router, } from 'react-router-dom';
 import theme from './theme';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import UserContex from './context/UserContex';
 import CartContext from './context/CartContext';
 import routes from './Router';

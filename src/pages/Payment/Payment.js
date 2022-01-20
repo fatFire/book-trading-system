@@ -1,32 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Flex,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
-  Box,
-  Heading,
-  Image,
-  Select,
-  SimpleGrid,
-  Textarea,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  createStandaloneToast
-} from '@chakra-ui/react';
+import { Flex, Text, Box, Heading, SimpleGrid, Textarea, FormControl, FormLabel, Input, Button, createStandaloneToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import ClosePage from '../../component/ClosePage';
-import { useMutation, useQueryClient } from 'react-query';
-import axios from 'axios';
+import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import CartContext from '../../context/CartContext';
 import UserContext from '../../context/UserContex'
 import { createOrder, deleteBookFromCart } from './api';
-
 
 export default function Payment(props) {
   const history = useHistory();

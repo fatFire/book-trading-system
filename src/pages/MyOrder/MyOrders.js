@@ -1,32 +1,13 @@
 import React from 'react';
-import {
-  Box,
-  Heading,
-  IconButton,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Flex,
-  Button,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Heading, Table, Thead, Tbody, Tfoot, Tr, Th, Td, Flex, Text, } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { Redirect, useHistory } from 'react-router';
-import axios from 'axios';
 import Loading from '../../component/Loading';
 import User from '../../context/UserContex';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { getMyOrders } from './api';
 
 export default function MyOrders() {
   const { user } = User.useContainer();
-  const history = useHistory();
-  console.log(user);
   const token = window.localStorage.getItem('jwt');
 
   const { isLoading, data: orders } = useQuery(

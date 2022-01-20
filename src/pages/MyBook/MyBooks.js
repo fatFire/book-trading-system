@@ -1,34 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Heading,
-  IconButton,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Button,
-  Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  createStandaloneToast
-} from '@chakra-ui/react';
+import { Box, Heading, Table, Thead, Tbody, Tr, Th, Td, Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, createStandaloneToast } from '@chakra-ui/react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Redirect, useHistory } from 'react-router';
-import axios from 'axios';
 import Loading from '../../component/Loading';
 import UserContex from '../../context/UserContex';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { getMyBooks, deleteBook } from './api';
 
 export default function MyBooks() {

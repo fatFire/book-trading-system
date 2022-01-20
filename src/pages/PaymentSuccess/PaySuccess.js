@@ -1,27 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Flex,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
-  Box,
-  Grid,
-  Input,
-  NumberInput,
-  NumberInputField,
-  Textarea,
-  Heading,
-  Image,
-  Select,
-  GridItem,
-  Button,
-  FormControl,
-  FormLabel,
-  createStandaloneToast,
-} from '@chakra-ui/react';
-import { AiOutlineCheck, AiOutlineCheckCircle } from 'react-icons/ai';
+import React from 'react';
+import { Flex, Text, Box } from '@chakra-ui/react';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { useHistory } from 'react-router';
 import ClosePage from '../../component/ClosePage';
 
