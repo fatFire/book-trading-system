@@ -50,13 +50,13 @@ export default function MyOrders() {
       <Heading w="500px" m="50px auto" textAlign="center">
         My Orders
       </Heading>
-      <Table variant="simple" w="1200px" m="0 auto">
+      <Table variant="simple" w="90%" m="0 auto">
         <Thead>
           <Tr>
             <Th>Order ID</Th>
             <Th>Address</Th>
             <Th>Card</Th>
-            <Th w="400px">Books</Th>
+            <Th>Books</Th>
             <Th>Total Amount(￡)</Th>
           </Tr>
         </Thead>

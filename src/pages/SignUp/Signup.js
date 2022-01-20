@@ -90,8 +90,7 @@ export default function Signup() {
 
 
   return (
-    <Wrap pt="200px">
-      <Box w="500px" m="0 auto">
+      <Box w="50%" m="150px auto 0">
         <Formik
           initialValues={{
             username: '',
@@ -177,7 +176,7 @@ export default function Signup() {
                 <Link
                   as={RouterLink}
                   to="/signin"
-                  fontSize="16px"
+                  fontSize="18px"
                   color="gray.400"
                   activeStyle={{
                     color: '#2A4365',
@@ -186,7 +185,7 @@ export default function Signup() {
                   Already has a account? Sign in!
                 </Link>
                 <Button
-                  colorScheme="teal"
+                  colorScheme="blue"
                   isLoading={mutation.isLoading}
                   type="submit"
                 >
@@ -197,6 +196,5 @@ export default function Signup() {
           )}
         </Formik>
       </Box>
-    </Wrap>
   );
 }

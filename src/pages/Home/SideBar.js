@@ -25,7 +25,7 @@ import { NavLink as RouterLink, useHistory } from 'react-router-dom';
 import UserContex from '../../context/UserContex';
 import CartContext from '../../context/CartContext';
 
-export default function NavBar() {
+export default function SideBar() {
   const { user, logout: userLogout } = UserContex.useContainer();
   const { logout } = CartContext.useContainer();
   const history = useHistory();
@@ -36,9 +36,9 @@ export default function NavBar() {
   };
 
   return (
-    <div>
-      <Flex h={200} align="center" mx="10">
-        {user?.username ? (
+    <Box>
+      <Flex justifyContent="center" alignItems="center" mt="80px">
+        {user?.id ? (
           <Avatar mr="20px" colorScheme="facebook" name={user?.username} />
         ) : null}
         <Popover trigger="hover">
@@ -56,7 +56,7 @@ export default function NavBar() {
             ) : (
               <Link
                 as={RouterLink}
-                to="/signup"
+                to="/signin"
                 fontSize="1.5rem"
                 fontWeight="semibold"
                 color="blue.800"
@@ -65,17 +65,17 @@ export default function NavBar() {
               </Link>
             )}
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent w="200px">
             <PopoverArrow />
             <PopoverBody>
-              <Button onClick={handleLogout} isDisabled={!user.username}>
+              <Button w="100%" onClick={handleLogout} isDisabled={!user.id}>
                 Log out
               </Button>
             </PopoverBody>
           </PopoverContent>
         </Popover>
-
-        <Flex justify="flex-end" sx={{ flex: 1 }}>
+      </Flex>
+      <Flex justifyContent="center" alignItems="center" mb="50px">
           <IconButton
             mt="10px"
             mr="5px"
@@ -96,8 +96,8 @@ export default function NavBar() {
             }}
           />
         </Flex>
-      </Flex>
-    </div>
+        <UserNavBar />
+    </Box>
   );
 }
 
@@ -122,23 +122,6 @@ function UserNavBar() {
       >
         Expolre <Icon as={AiOutlineRight}></Icon>
       </Link>
-      {/* <Link
-          as={RouterLink}
-          to="/categories"
-          fontSize="20px"
-          display="flex"
-          w="100%"
-          justifyContent="space-between"
-          alignItems="center"
-          mb="30px"
-          fontWeight="semibold"
-          color="gray.400"
-          activeStyle={{
-            color: '#2A4365',
-          }}
-        >
-          Categories <Icon as={AiOutlineRight}></Icon>
-        </Link> */}
       <Link
         as={RouterLink}
         to="/sellbook"
@@ -154,7 +137,7 @@ function UserNavBar() {
           color: '#2A4365',
         }}
       >
-        Sell a book <Icon as={AiOutlineRight}></Icon>
+        Sell book <Icon as={AiOutlineRight}></Icon>
       </Link>
       <Link
         as={RouterLink}

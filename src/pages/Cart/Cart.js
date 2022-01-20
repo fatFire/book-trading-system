@@ -34,15 +34,15 @@ export default function Cart() {
   const { cart, setCart } = CartContex.useContainer();
   const history = useHistory();
   const queryClient = useQueryClient();
-  
-  
+
+
   let totalamount = 0;
   cart.books?.forEach(book => {
     totalamount += book.price;
   });
 
   const deleteBook = function (id) {
-    const books = cart.books.filter(book => book.id != id);
+    const books = cart.books.filter(book => book.id !== id);
     const data = {
       books,
     };
@@ -65,8 +65,8 @@ export default function Cart() {
       totalamount,
     });
   };
-  
-  
+
+
   if(!user.id) {
     return <Redirect to="/signin" />
   }
@@ -76,7 +76,7 @@ export default function Cart() {
       <Heading w="500px" m="50px auto" textAlign="center">
         Shopping Cart
       </Heading>
-      <Box w="1200px" m="0 auto">
+      <Box w="90%" m="0 auto">
         <Table variant="simple">
           <Thead>
             <Tr>

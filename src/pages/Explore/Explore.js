@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Flex, Text, Box, Heading, Image } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Flex, Text, Box, Heading, Image, Grid } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -27,7 +27,7 @@ export default function Explore() {
     return value;
   };
 
-  const { data:books, isLoading, isSuccess, refetch } = useQuery('allbooks', () => {
+  const { data: books, isLoading, isSuccess, refetch } = useQuery('allbooks', () => {
     const name = convert2Undefined(filters.bookname);
     const condition = convert2Undefined(filters.condition);
     const min = convert2Undefined(filters.min)
@@ -52,42 +52,49 @@ export default function Explore() {
     return getAllBooks(query)
   });
 
+  useEffect(() => {
+    refetch()
+  }, [filters, refetch])
 
-  if(isLoading) {
+
+  if (isLoading) {
     return <Loading />
   }
 
-  if(!isSuccess) {
+  if (!isSuccess) {
     return <Error />
   }
 
   return (
-    <Box h="100vh" overflow="auto" px="20" >
-      <Flex h="200px" alignItems="center">
-        <Heading color="blue.800" mr="200px">
+    <Box px="20">
+      <Flex h="200px" alignItems="center" justifyContent="space-between">
+        <Heading color="blue.800">
           All Books
         </Heading>
         <Search filters={filters} setFilters={setFilters} refetch={refetch} />
       </Flex>
-      <Flex flexWrap="wrap">
-        {books.length === 0 ? (
-          <Flex
-            w="100%"
-            justifyContent="center"
-            fontSize="24px"
-            fontWeight="600"
-          >
-            No Book
-          </Flex>
-        ) : (
-          books.map(book => (
+
+      {books.length === 0 ? (
+        <Flex
+          w="100%"
+          justifyContent="center"
+          fontSize="24px"
+          fontWeight="600"
+        >
+          No Book
+        </Flex>
+      ) : (
+        <Grid justifyContent="space-between" gridTemplateColumns="repeat(auto-fill, 200px)" >
+          {books.map(book => (
             <BookCover
               key={book._id}
               {...book}
             />
-          ))
-        )}
-      </Flex>
+          ))}
+        </Grid>
+
+      )}
+
     </Box>
   );
 }

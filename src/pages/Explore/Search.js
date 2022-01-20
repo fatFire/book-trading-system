@@ -29,7 +29,6 @@ export default function Search({filters, setFilters, refetch}) {
 
 
   const handleInputChange = event => {
-    console.log(event.target.name, event.target.value);
     setFilters(prevState => {
       return { ...prevState, [event.target.name]: event.target.value };
     });
@@ -40,7 +39,6 @@ export default function Search({filters, setFilters, refetch}) {
   };
 
   const handleClear = () => {
-    console.log(1);
     setFilters({
       min: '',
       max: '',
@@ -171,7 +169,7 @@ export default function Search({filters, setFilters, refetch}) {
           onChange={handleInputChange}
           placeholder="Search books by name, author and isbn"
         />
-        <InputRightElement>
+        <InputRightElement width="80px">
           <IconButton
             aria-label="Search database"
             icon={<AiOutlineReload fontSize="20px" />}

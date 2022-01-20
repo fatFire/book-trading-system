@@ -34,21 +34,19 @@ import { modifyBook } from './api';
 export default function ModifyBook() {
   const toast = createStandaloneToast();
   const history = useHistory();
-  const user = User.useContainer();
+  const { user } = User.useContainer();
   const book = history.location.state.book;
-  console.log(book);
-  console.log(user);
   const token = window.localStorage.getItem('jwt');
 
   const formik = useFormik({
     initialValues: {
-      bookname: book.bookname,
-      author: book.author,
-      isbn: book.isbn,
-      description: book.description,
-      price: book.price,
-      category: book.category.id,
-      condition: book.condition,
+      bookname: book?.bookname,
+      author: book?.author,
+      isbn: book?.isbn,
+      description: book?.description,
+      price: book?.price,
+      category: book?.category?.id,
+      condition: book?.condition,
       imgs: [],
     },
     onSubmit: null,
@@ -57,7 +55,7 @@ export default function ModifyBook() {
   const mutationFn = () => {
     const formData = new FormData();
     const data = {};
-    data['users_permissions_user'] = user.user.id;
+    data['users_permissions_user'] = user.id;
     const values = formik.values;
     for (let key in values) {
       if (key === 'imgs') {
@@ -98,8 +96,7 @@ export default function ModifyBook() {
   };
 
   return (
-    <Wrap pt="100px">
-      {!!token ? null : <Redirect to="/signin" />}
+    <Box mt="50px">
       <IconButton
         position="fixed"
         right="10px"
@@ -109,10 +106,10 @@ export default function ModifyBook() {
         icon={<AiOutlineCloseCircle fontSize="26px" />}
         onClick={handleClose}
       />
-      <Heading fontSize="26px" w="500px" m="0 auto 30px" textAlign="center">
+      <Heading w="500px" m="50px auto" textAlign="center">
         Modify Book
       </Heading>
-      <Grid templateColumns="repeat(2, 1fr)" w="50%" m="0 auto" gap={10}>
+      <Grid templateColumns="repeat(2, 1fr)" w="80%" m="0 auto" gap={10}>
         <FormControl id="bookname" isRequired>
           <FormLabel fontWeight="semibold" fontSize="lg" mb={2}>
             Book Name:
@@ -238,6 +235,6 @@ export default function ModifyBook() {
           </Button>
         </GridItem>
       </Grid>
-    </Wrap>
+    </Box>
   );
 }

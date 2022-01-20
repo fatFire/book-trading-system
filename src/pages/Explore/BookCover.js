@@ -11,7 +11,7 @@ export default function BookCover (props) {
   }
 
   return (
-    <Box mr="45px" mb="50px" cursor="pointer" onClick={handleClick}>
+    <Box mb="50px" cursor="pointer" onClick={handleClick}>
       <Flex
         w="200px"
         h="250px"
@@ -20,7 +20,6 @@ export default function BookCover (props) {
         justify="center"
         align="center"
       >
-        {/* <Image src={props.baseURL + props.imgs?.[0]?.url} border="none" height="200px" width="150px" fit="fill" /> */}
         <Image
           src={props.cover}
           border="none"

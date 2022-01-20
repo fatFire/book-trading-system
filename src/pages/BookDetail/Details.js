@@ -1,53 +1,30 @@
-import React, { useContext, useState } from 'react';
-import {
-  Flex,
-  Button,
-  Avatar,
-  IconButton,
-  Text,
-  Link,
-  Icon,
-  Box,
-  Heading,
-  Image,
-  Divider,
-  Textarea,
-} from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { useHistory, useParams } from 'react-router';
-import { useMutation } from 'react-query';
-import { useQueryClient, useQuery } from 'react-query';
-import UserContext from '../../context/UserContex';
+import { useMutation, useQuery, useQueryClient, } from 'react-query';
+import { useHistory, useParams, } from 'react-router';
+import { Avatar, Box, Button, Divider, Flex, IconButton, Image, Text, Textarea, } from '@chakra-ui/react';
 import CartContext from '../../context/CartContext';
-import axios from 'axios';
-import Loading from '../../component/Loading';
-import { Redirect } from 'react-router';
-// import {
-//   createComment,
-//   findAllComments,
-//   findOrCreateConversation,
-// } from '../../api/api';
-import { addToCart, createComment, findAllComments, findOrCreateConversation } from './api';
+import UserContext from '../../context/UserContex';
+import { addToCart, createComment, findAllComments, findOrCreateConversation, } from './api';
 
 export default function Details() {
   const history = useHistory();
   const { id } = useParams();
   const queryClient = useQueryClient();
-  const {cart, setCart} = CartContext.useContainer();
-  const {user} = UserContext.useContainer();
+  const { cart, setCart } = CartContext.useContainer();
+  const { user } = UserContext.useContainer();
   const token = window.localStorage.getItem('jwt');
 
-  const isInCart =
-    cart.books?.some(book => book.id === id) || false;
+  const isInCart = cart.books?.some(book => book.id === id) || false;
 
   const book = queryClient
     .getQueryData('allbooks')
     .find(item => item.id === id);
-  
+
   const { data: comments } = useQuery(
     'comments',
     () => {
-      return  findAllComments(book.id);
+      return findAllComments(book.id);
     },
     {
       enabled: !!book,
@@ -71,20 +48,22 @@ export default function Details() {
 
   const mutation = useMutation(mutationFn, {
     onSuccess: data => {
-      console.log(data);
       setCart(data);
     },
   });
 
-  const createConversation = useMutation((data) => {
-    return findOrCreateConversation(data, { token })}, {
-    onSuccess: data => {
-      console.log(data);
-      history.push(`/contact/${data.id}`, {
-        conversation: data,
-      });
+  const createConversation = useMutation(
+    data => {
+      return findOrCreateConversation(data, { token });
     },
-  });
+    {
+      onSuccess: data => {
+        history.push(`/contact/${data.id}`, {
+          conversation: data,
+        });
+      },
+    }
+  );
 
   const handleAddToCart = function () {
     if (!user.id) {
@@ -109,11 +88,6 @@ export default function Details() {
     if (!user.id) {
       history.push('/signin');
     } else {
-      console.log({
-        book: book.id,
-        user1: user.id,
-        user2: book['users_permissions_user'].id,
-      });
       createConversation.mutate({
         book: book.id,
         users: [user.id, book['users_permissions_user'].id],
@@ -200,22 +174,7 @@ export default function Details() {
             </div>
           </Flex>
         </Flex>
-        {/* <Flex mt="30px">
-          {book.imgs.map(img => (
-            <Image
-              src={`${baseURL}` + img.url}
-              border="none"
-              height="200px"
-              width="150px"
-              fit="fill"
-            />
-          ))}
-        </Flex> */}
-        <Comment
-          comments={comments || []}
-          book={book}
-          user={user}
-        />
+        <Comment comments={comments || []} book={book} user={user} />
       </Box>
     </div>
   );
@@ -225,7 +184,7 @@ function Comment({ comments, book, user }) {
   const [input, setInput] = useState('');
   const queryClient = useQueryClient();
   const token = window.localStorage.getItem('jwt');
-  const history = useHistory()
+  const history = useHistory();
 
   function handleEnter(e) {
     e.preventDefault();
@@ -239,20 +198,21 @@ function Comment({ comments, book, user }) {
     setInput(e.target.value);
   }
 
-  const commentMutate = useMutation((data) => {
-    return createComment(data, { token })
-  }, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('comments');
-      // console.log(data)
-      // setAllComments(prev => [...prev, data.data]);
+  const commentMutate = useMutation(
+    data => {
+      return createComment(data, { token });
     },
-  });
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('comments');
+      },
+    }
+  );
 
   const handleSend = function () {
-    if(!user.id) {
+    if (!user.id) {
       history.push('/signin');
-      return
+      return;
     }
     const comment = {
       comment: input,
@@ -262,8 +222,6 @@ function Comment({ comments, book, user }) {
     setInput('');
     commentMutate.mutate(comment);
   };
-
-  console.log(comments)
 
   return (
     <Box mt="50px">

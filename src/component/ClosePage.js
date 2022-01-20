@@ -7,7 +7,7 @@ export default function ClosePage(props) {
   const history = useHistory();
 
   const handleClose = () => {
-    history.push("/")
+    history.goBack()
   };
 
   return (

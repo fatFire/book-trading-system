@@ -16,8 +16,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 import UserContext from '../../context/UserContex';
-import { useHistory, useParams } from 'react-router';
-import { useMutation, useQuery } from 'react-query';
+import { useHistory, useParams, Redirect } from 'react-router';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { socket } from '../../web-sockets';
 import ClosePage from '../../component/ClosePage';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -26,37 +26,31 @@ import { findAllCoversations } from './api';
 export default function Contact() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const [conversation, setConsersation] = useState(undefined);
+  const [conversation, setConversation] = useState(undefined);
   const { user } = UserContext.useContainer();
-  const history = useHistory();
-  // const { id: conversationID } = useParams();
-  // console.log('conversationID:', conversation);
+  const queryClient = useQueryClient()
 
-  const { data: conversations } = useQuery(['conversations'], () =>
+  const { data: conversations } = useQuery('conversations', () =>
     findAllCoversations({
       user: user.id,
     })
   );
-  console.log(conversations);
 
   const handleSend = function () {
+    if(!input.trim().length) return
     const to = conversation.users.find(_ => _.id !== user.id);
-    console.log(input, user.id, to);
     const message = {
       message: input,
       fromto: [user.id, to.id],
       conversation: conversation.id,
     };
     setInput('');
-    // setMessages(prev => {
-    //   return [...prev, message];
-    // });
-    // messageMutation.mutate(message);
     socket.emit('send_message', message);
   };
 
   function handleEnter(e) {
     if (e.key === 'Enter') {
+      e.preventDefault()
       handleSend();
     }
   }
@@ -72,23 +66,25 @@ export default function Contact() {
       setMessages(prev => {
         return [...prev, res];
       });
+      queryClient.invalidateQueries('conversations')
     });
-  }, []);
-  console.log(messages);
+  },
+  // eslint-disable-next-line
+  []);
 
-  // socket.on('send_message', res => {
-  //   console.log(res);
-  //   setMessages(prev => {
-  //     return [...prev, res];
-  //   });
-  // });
+  if(!user.id) {
+    return (
+      <Redirect to="/signin" />
+    )
+  }
 
   return (
     <Flex h="100vh">
       <SideBar
         conversations={conversations || []}
+        messages={messages}
         setMessages={setMessages}
-        setConsersation={setConsersation}
+        setConversation={setConversation}
       />
       {conversation ? (
         <Box padding="10px" flex={1}>
@@ -154,24 +150,10 @@ function Message({ isLeft, message }) {
   );
 }
 
-function SideBar({ conversations, setMessages, setConsersation }) {
-  // const { user } = UserContext.useContainer();
-  // const { data: conversations } = useQuery(['conversations'], () =>
-  //   findAllCoversations({
-  //     user: user.id,
-  //   })
-  // );
-  // console.log(conversations);
-  // const history = useHistory();
+function SideBar({ conversations, setMessages, setConversation }) {
   const handleClick = ({ messages, conversation }) => {
     setMessages(messages);
-    setConsersation(conversation);
-  };
-
-  const history = useHistory();
-
-  const handleClose = () => {
-    history.push('/');
+    setConversation(conversation);
   };
 
   return (
@@ -185,11 +167,11 @@ function SideBar({ conversations, setMessages, setConsersation }) {
       <Text fontSize="24px" fontWeight="600" mb="10px">
         Conversations:{' '}
       </Text>
-      {conversations.length === 0
+      {!conversations.length
         ? 'No Conversation'
         : conversations.map(conversation => (
             <Flex
-              key={conversation.id}
+              key={conversation?.id}
               h="80px"
               mb="20px"
               cursor="pointer"
@@ -201,18 +183,18 @@ function SideBar({ conversations, setMessages, setConsersation }) {
               <Image
                 h="80px"
                 w="50px"
-                src={conversation.book.cover}
+                src={conversation?.book?.cover}
                 mr="10px"
               />
-              <Flex wrap="wrap" direction="column" flex={1}>
-                <Text mt="10px" fontSize="lg" isTruncated fontWeight="600">
-                  {conversation.book.bookname}
+              <Box width="calc(100% - 60px)">
+                <Text fontSize="lg" isTruncated  fontWeight="600">
+                  {conversation?.book?.bookname}
                 </Text>
-                <Text color="#718096" mt="10px" isTruncated>
+                <Box color="#718096" mt="10px" isTruncated>
                   {conversation?.messages[conversation.messages.length - 1]
                     ?.message || ''}
-                </Text>
-              </Flex>
+                </Box>
+              </Box>
             </Flex>
           ))}
     </Box>
